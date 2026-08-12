@@ -399,28 +399,21 @@ impl Drop for PrimeStream {
     }
 }
 
-fn stream() -> impl Iterator<Item = u32> {
+/// Lazy iterator over every prime up to u32::MAX, in order.
+pub fn stream() -> impl Iterator<Item = u32> {
     PrimeStream::new()
 }
 
-struct PrimeSieve;
+pub struct PrimeSieve;
 impl PrimeSieve {
-    fn up_to(limit: u64) -> Vec<u64> {
+    /// All primes <= `limit`, collected. `limit` above u32::MAX yields the same
+    /// result as u32::MAX -- the sieve's range ceiling.
+    pub fn up_to(limit: u64) -> Vec<u64> {
         stream()
             .take_while(|&p| p as u64 <= limit)
             .map(|p| p as u64)
             .collect()
     }
-}
-
-fn main() {
-    let start = std::time::Instant::now();
-    let p = stream()
-        .nth(100_000_000)
-        .expect("stream exhausted before the 100_000_001st prime");
-    let end = std::time::Instant::now();
-    println!("Time taken: {:.2?}", end - start);
-    println!("100_000_001st prime: {}", p);
 }
 
 #[cfg(test)]

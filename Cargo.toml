@@ -2,5 +2,10 @@
 name = "primes_2"
 version = "0.1.0"
 edition = "2024"
+description = "Multithreaded segmented sieve of Eratosthenes: a lazy iterator over every prime up to u32::MAX"
+license = "Apache-2.0"
+repository = "https://github.com/potzko/primes_2"
+keywords = ["primes", "sieve", "eratosthenes", "iterator"]
+categories = ["mathematics", "algorithms"]
 
 [dependencies]
